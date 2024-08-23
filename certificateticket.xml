@@ -1,0 +1,37 @@
+<root>
+      <name>CertificateTicket</name>
+      <key>certificateticket</key>
+      <state>stable</state>
+      <description>
+         <short>
+            <en>Plugin to create a ticket when certificate will expire</en>
+         </short>
+         <long>
+            <en>Plugin to create a ticket when certificate will expire</en>
+         </long>
+      </description>
+      <homepage></homepage>
+      <download></download>
+      <issues></issues>
+      <readme></readme>
+      <authors>
+         <author>ADZ</author>
+      </authors>
+      <versions>
+         <version>
+            <num>0.0.1</num>
+            <compatibility>~10.0.0</compatibility>
+         </version>
+      </versions>
+      <langs>
+         <lang>en_GB</lang>
+      </langs>
+      <license>GPL v2+</license>
+      <tags>
+         <en>
+            <tag>certificateticket</tag>
+         </en>
+      </tags>
+      <screenshots>
+      </screenshots>
+</root>
