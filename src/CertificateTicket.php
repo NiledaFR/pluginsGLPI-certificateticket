@@ -16,12 +16,9 @@ use Certificates;
 // Class of the defined type
 class CertificateTicket extends CommonDBTM {
 
-   static $tags = '[EXAMPLE_ID]';
-   public static $rightname = 'plugin_example';
-
    // Should return the localized name of the type
    static function getTypeName($nb = 0) {
-      return 'CertificateTicket Type';
+      return 'CertificateTicket';
    }
 
    /**
@@ -59,17 +56,6 @@ class CertificateTicket extends CommonDBTM {
             $before = Entity::getUsedConfig('send_certificates_alert_before_delay', $entity);
             $repeat = Entity::getUsedConfig('certificates_alert_repeat_interval', $entity);
 
-            // Preparation of the SQL request
-            /*if ($repeat > 0) {
-                $where_date = [
-                    'OR' => [
-                        ['glpi_plugin_certificate_ticket.date' => null],
-                        ['glpi_plugin_certificate_ticket.date' => ['<', new QueryExpression('CURRENT_TIMESTAMP() - INTERVAL ' . $repeat . ' second')]],
-                    ]
-                ];
-            } else {
-                $where_date = ['glpi_alerts.date' => null];
-            }*/
             $iterator = $DB->request(
                 [
                     'SELECT'    => [
@@ -85,7 +71,6 @@ class CertificateTicket extends CommonDBTM {
                         ]
                     ],
                     'WHERE'     => [
-                        //$where_date,
                         'glpi_certificates.is_deleted'  => 0,
                         'glpi_certificates.is_template' => 0,
                         [
