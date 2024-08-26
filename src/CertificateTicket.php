@@ -10,8 +10,8 @@
  */
 
 //We load the needed classes
-//use CommonDBTM;
-//use Certificates;
+use CommonDBTM;
+use Certificates;
 
 // Class of the defined type
 class CertificateTicket extends CommonDBTM {
