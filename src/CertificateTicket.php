@@ -98,7 +98,7 @@ class CertificateTicket extends CommonDBTM {
                 }
 
 	        // ticket name preparation
-	        $tktname = "Certificate ".$certificate->fields['name'] . (!empty($certificate->fields['serial']) ? ' - ' . $certificate->fields['serial'] : '')." expired on ".Html::convDate($certificate->fields['date_expiration']);
+	        $tktname = addslashes("Certificate ".$certificate->fields['name'] . (!empty($certificate->fields['serial']) ? ' - ' . $certificate->fields['serial'] : '')." expired on ".Html::convDate($certificate->fields['date_expiration']));
                 
                 // ticket options preparation
                 $tkt = [];
