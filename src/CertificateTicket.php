@@ -106,8 +106,13 @@ class CertificateTicket extends CommonDBTM {
 		$task->log($certificate_data['date_expiration']." == ".$certificate_data['date']);
                 $tkt['name'] = $tktname;
                 $tkt['content'] = "Certificate will soon expire or is expired, please correct this !";
-                $tkt['_users_id_assign'] = $certificate_data['users_id_tech'];
-	        $tkt['_groups_id_assign'] = $certificate_data['groups_id_tech'];
+                if(isset($certificate_data['users_id_tech'])){
+                        $tkt['_users_id_assign'] = $certificate_data['users_id_tech'];
+                }
+                if(isset($certificate_data['users_id_tech'])){
+                        $tkt['_groups_id_assign'] = $certificate_data['groups_id_tech'];
+                }
+
                     
                 $ticket = new Ticket();
                 if(!$certificate_data['date']){
