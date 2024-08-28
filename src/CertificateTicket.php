@@ -109,7 +109,7 @@ class CertificateTicket extends CommonDBTM {
                 if(isset($certificate_data['users_id_tech'])){
                         $tkt['_users_id_assign'] = $certificate_data['users_id_tech'];
                 }
-                if(isset($certificate_data['users_id_tech'])){
+                if(isset($certificate_data['groups_id_tech'])){
                         $tkt['_groups_id_assign'] = $certificate_data['groups_id_tech'];
                 }
 
