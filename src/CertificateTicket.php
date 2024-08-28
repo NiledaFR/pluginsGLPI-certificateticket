@@ -59,7 +59,7 @@ class CertificateTicket extends CommonDBTM {
             $iterator = $DB->request(
                 [
                     'SELECT'    => [
-                        'glpi_certificates.id','glpi_certificates.date_expiration','glpi_certificates.users_id_tech','glpi_certificates.groups_id_tech','glpi_plugin_certificate_ticket.date'
+                        'glpi_certificates.id','glpi_certificates.date_expiration','glpi_certificates.groups_id','glpi_certificates.users_id_tech','glpi_certificates.groups_id_tech','glpi_plugin_certificate_ticket.date'
                     ],
                     'FROM'      => 'glpi_certificates',
                     'LEFT JOIN' => [
@@ -107,7 +107,7 @@ class CertificateTicket extends CommonDBTM {
                 $tkt['name'] = $tktname;
                 $tkt['content'] = "Certificate will soon expire or is expired, please correct this !";
 	    	if(isset($certificate_data['groups_id'])){
-                        $tkt['_groups_id_observe'] = $certificate_data['groups_id'];
+                        $tkt['_groups_id_observer'] = $certificate_data['groups_id'];
                 }
                 if(isset($certificate_data['users_id_tech'])){
                         $tkt['_users_id_assign'] = $certificate_data['users_id_tech'];
