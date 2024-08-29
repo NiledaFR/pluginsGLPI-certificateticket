@@ -10,9 +10,9 @@
             <en>Plugin to create a ticket when certificate will expire</en>
          </long>
       </description>
-      <homepage></homepage>
-      <download></download>
-      <issues></issues>
+      <homepage>https://github.com/NiledaFR/pluginsGLPI-certificateticket</homepage>
+      <download>https://github.com/NiledaFR/pluginsGLPI-certificateticket/releases</download>
+      <issues>https://github.com/NiledaFR/pluginsGLPI-certificateticket/issues</issues>
       <readme></readme>
       <authors>
          <author>ADZ</author>
