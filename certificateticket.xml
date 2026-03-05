@@ -20,7 +20,7 @@
       <versions>
          <version>
             <num>0.0.2</num>
-            <compatibility>~10.0.0</compatibility>
+            <compatibility>~11.0.0</compatibility>
          </version>
       </versions>
       <langs>
