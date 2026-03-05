@@ -17,7 +17,7 @@ define('PLUGIN_CERTIFICATETICKET_VERSION', '0.0.1');
 // Minimal GLPI version, inclusive
 define('PLUGIN_CERTIFICATETICKET_MIN_GLPI', '10.0.0');
 // Maximum GLPI version, exclusive
-define('PLUGIN_CERTIFICATETICKET_MAX_GLPI', '10.0.99');
+define('PLUGIN_CERTIFICATETICKET_MAX_GLPI', '11.0.99');
 
 /**
  * Init hooks of the plugin.
