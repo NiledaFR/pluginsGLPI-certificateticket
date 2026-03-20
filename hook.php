@@ -44,7 +44,7 @@ function plugin_certificateticket_install() {
                   `date` date,
                 PRIMARY KEY (`id`)
       ) ENGINE=InnoDB DEFAULT CHARSET={$default_charset} COLLATE={$default_collation} ROW_FORMAT=DYNAMIC;";
-      $DB->query($query) or die("error creating glpi_plugin_certificate_ticket ". $DB->error());
+      $DB->doQueryOrDie($query,"error creating glpi_plugin_certificate_ticket ". $DB->error());
    }
 
 
@@ -67,7 +67,7 @@ function plugin_certificateticket_uninstall() {
    // We drop the table when we uninstall the plugin
    if ($DB->tableExists("glpi_plugin_certificate_ticket")) {
       $query = "DROP TABLE `glpi_plugin_certificate_ticket`";
-      $DB->query($query) or die("error deleting glpi_dropdown_plugin_example");
+      $DB->doQueryOrDie($query,"error deleting glpi_dropdown_plugin_example");
    }
 
    // May be used later
