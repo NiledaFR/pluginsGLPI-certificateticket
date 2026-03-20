@@ -59,7 +59,7 @@ class CertificateTicket extends CommonDBTM {
             $iterator = $DB->request(
                 [
                     'SELECT'    => [
-                        'glpi_certificates.id','glpi_certificates.date_expiration','glpi_certificates.groups_id','glpi_certificates.users_id_tech','glpi_certificates.groups_id_tech','glpi_plugin_certificate_ticket.date'
+                        'glpi_certificates.id','glpi_certificates.date_expiration','glpi_certificates.users_id_tech','glpi_plugin_certificate_ticket.date'
                     ],
                     'FROM'      => 'glpi_certificates',
                     'LEFT JOIN' => [
@@ -90,6 +90,19 @@ class CertificateTicket extends CommonDBTM {
             foreach ($iterator as $certificate_data) {
 
                 $certificate_id = $certificate_data['id'];
+				$group_iterator = $DB->request(
+					[ 
+						'SELECT' => [ 'id', 'groups_id', 'type'], 
+						'FROM' => 'glpi_groups_items',
+						'WHERE' => ['itemtype' => 'Certificate', 'items_id' => $certificate_data['id']]
+					]
+				);
+				$group_ids = [];
+				foreach ($glpi_iterator as $groups_data) {
+					$group_ids[] = $groups_data['id'];
+				}
+				$group_ids = implode(',', $group_ids);
+				
                 $certificate = new Certificate();
                 if (!$certificate->getFromDB($certificate_id)) {
                     $errors++;
@@ -106,14 +119,14 @@ class CertificateTicket extends CommonDBTM {
 		$task->log($certificate_data['date_expiration']." == ".$certificate_data['date']);
                 $tkt['name'] = $tktname;
                 $tkt['content'] = "Certificate will soon expire or is expired, please correct this !";
-	    	if(isset($certificate_data['groups_id'])){
+				if(isset($certificate_data['groups_id'])){
                         $tkt['_groups_id_observer'] = $certificate_data['groups_id'];
                 }
                 if(isset($certificate_data['users_id_tech'])){
                         $tkt['_users_id_assign'] = $certificate_data['users_id_tech'];
                 }
-                if(isset($certificate_data['groups_id_tech'])){
-                        $tkt['_groups_id_assign'] = $certificate_data['groups_id_tech'];
+                if(isset($group_ids)){
+                        $tkt['_groups_id_assign'] = $group_ids;
                 }
 
                     
@@ -124,14 +137,14 @@ class CertificateTicket extends CommonDBTM {
                     $ticket_id = $ticket->add($tkt);
 
 		    $query = "INSERT INTO `glpi_plugin_certificate_ticket` (`certificate_id`, `ticket_id`, `date`) VALUES (".$certificate_data['id'].",$ticket_id,'".$certificate_data['date_expiration']."')";
-    	            $DB->query($query) or die("error populate glpi_plugin_example ". $DB->error());
+    	            $DB->doQueryOrDie($query,"error populate glpi_plugin_example ". $DB->error());
                 }elseif($certificate_data['date_expiration'] !== $certificate_data['date']){
                     $task->addVolume(1);
                     $total++;
                     $ticket_id = $ticket->add($tkt);
 
 		    $query = "UPDATE `glpi_plugin_certificate_ticket` SET date='".$certificate_data['date_expiration']."' WHERE certificate_id=".$certificate_data['id'];
-    	            $DB->query($query) or die("error populate glpi_plugin_example ". $DB->error());
+    	            $DB->doQueryOrDie($query,"error populate glpi_plugin_example ". $DB->error());
 		}
             }
         }
